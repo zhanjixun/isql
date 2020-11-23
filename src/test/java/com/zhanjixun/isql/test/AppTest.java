@@ -1,5 +1,7 @@
 package com.zhanjixun.isql.test;
 
+import com.zhanjixun.isql.builder.TableSQLBuilder;
+import com.zhanjixun.isql.test.entity.Student;
 import org.junit.Test;
 
 /**
@@ -10,8 +12,10 @@ public class AppTest {
 
     @Test
     public void name1() {
+        String s = TableSQLBuilder.buildCreateSQL(Student.class);
+        
 
     }
-    
+
 
 }
