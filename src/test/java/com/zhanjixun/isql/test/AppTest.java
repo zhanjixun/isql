@@ -12,10 +12,7 @@ public class AppTest {
 
     @Test
     public void name1() {
-        String s = TableSQLBuilder.buildCreateSQL(Student.class);
-        
-
+        System.out.println(TableSQLBuilder.buildCreateSQL(Student.class));
     }
-
-
+    
 }

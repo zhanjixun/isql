@@ -17,9 +17,7 @@ import java.lang.annotation.Target;
 public @interface Table {
     /**
      * 表名前缀
-     * 例如
-     *
-     * @return
+     * 例如tb_
      */
     String prefix() default "";
 
@@ -37,4 +35,9 @@ public @interface Table {
      * 转换Java的驼峰命名法为下划线命名法
      */
     boolean underScoreCase() default true;
+
+    /**
+     * 是否大写字段名
+     */
+    boolean toUpperCase() default false;
 }
