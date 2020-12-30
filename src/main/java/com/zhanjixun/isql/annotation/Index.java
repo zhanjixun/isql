@@ -31,6 +31,16 @@ public @interface Index {
      */
     IndexType type() default IndexType.NORMAL;
 
+    /**
+     * 索引方法
+     */
+    IndexMethod method() default IndexMethod.EMPTY;
+
+    /**
+     * 备注
+     */
+    String comment() default "";
+
     //指定多个时使用
     @Target(ElementType.TYPE)
     @Retention(RetentionPolicy.RUNTIME)

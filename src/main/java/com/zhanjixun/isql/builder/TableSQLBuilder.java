@@ -48,7 +48,9 @@ public class TableSQLBuilder {
         //索引
         String indexStr = Optional.of(type.getAnnotationsByType(Index.class)).map(indices -> Arrays.stream(indices).map(index -> {
             String columnNames = Arrays.stream(index.columnList().split(",")).map(f -> getColumnName(type, f)).collect(Collectors.joining(","));
-            return String.format("\n %s KEY %s(%s)", index.type().getName(), index.name(), columnNames);
+            String method = index.method().getName().equals("") ? "" : "USING " + index.method().getName();
+            String comment = index.comment().equals("") ? "" : "COMMENT '" + index.comment() + "'";
+            return String.format("\n %s KEY %s(%s) %s %s", index.type().getName(), index.name(), columnNames, method, comment);
         }).collect(Collectors.joining(",\n"))).orElse("");
 
         String tableDeclare = Lists.newArrayList(columnStr, primaryKeyStr, indexStr).stream().filter(StringUtils::isNotBlank).collect(Collectors.joining(","));
@@ -107,11 +109,11 @@ public class TableSQLBuilder {
                     return " YEAR";
                 //浮点数值
                 case FLOAT:
-                    return String.format(" FLOAT(%s,%s)", column.precision(), column.scale());
+                    return String.format(" FLOAT(%s,%s)", column.length(), column.decimals());
                 case DOUBLE:
-                    return String.format(" DOUBLE(%s,%s)", column.precision(), column.scale());
+                    return String.format(" DOUBLE(%s,%s)", column.length(), column.decimals());
                 case DECIMAL:
-                    return String.format(" DECIMAL(%s,%s)", column.precision(), column.scale());
+                    return String.format(" DECIMAL(%s,%s)", column.length(), column.decimals());
                 //二进制
                 case BLOB:
                     return " BLOB";
@@ -142,13 +144,13 @@ public class TableSQLBuilder {
             return " INT(" + column.length() + ")";
         }
         if (filedType == Double.class || filedType == double.class) {
-            return " DOUBLE(" + column.precision() + "," + column.scale() + ")";
+            return " DOUBLE(" + column.length() + "," + column.decimals() + ")";
         }
         if (filedType == Float.class || filedType == float.class) {
-            return " FLOAT(" + column.precision() + "," + column.scale() + ")";
+            return " FLOAT(" + column.length() + "," + column.decimals() + ")";
         }
         if (filedType == BigDecimal.class) {
-            return " DECIMAL(" + column.precision() + "," + column.scale() + ")";
+            return " DECIMAL(" + column.length() + "," + column.decimals() + ")";
         }
         if (filedType == Date.class || filedType == java.sql.Date.class) {
             return " DATE";

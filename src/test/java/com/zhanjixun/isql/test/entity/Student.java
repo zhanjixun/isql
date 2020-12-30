@@ -1,10 +1,7 @@
 package com.zhanjixun.isql.test.entity;
 
 
-import com.zhanjixun.isql.annotation.Column;
-import com.zhanjixun.isql.annotation.Index;
-import com.zhanjixun.isql.annotation.IndexType;
-import com.zhanjixun.isql.annotation.Table;
+import com.zhanjixun.isql.annotation.*;
 import lombok.Data;
 
 /**
@@ -13,7 +10,7 @@ import lombok.Data;
  */
 @Data
 @Table(prefix = "tb_", name = "student", comment = "学生表")
-@Index(name = "idx_student_no", columnList = "studentNo", type = IndexType.UNIQUE)
+@Index(name = "idx_student_no", columnList = "studentNo", type = IndexType.UNIQUE, method = IndexMethod.BTREE, comment = "学号索引")
 public class Student {
 
     @Column(length = 11, primaryKey = true)

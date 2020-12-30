@@ -40,4 +40,6 @@ public @interface Table {
      * 是否大写字段名
      */
     boolean toUpperCase() default false;
+    
+
 }

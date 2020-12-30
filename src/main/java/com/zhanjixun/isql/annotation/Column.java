@@ -1,6 +1,5 @@
 package com.zhanjixun.isql.annotation;
 
-
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -37,16 +36,10 @@ public @interface Column {
     int length() default 255;
 
     /**
-     * 精度
+     * 小数点
      * 支持浮点型和定点型
      */
-    int precision() default 0;
-
-    /**
-     * 标度
-     * 支持浮点型和定点型
-     */
-    int scale() default 0;
+    int decimals() default 0;
 
     /**
      * 是否可以为null
