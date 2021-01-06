@@ -158,4 +158,9 @@ public class TableSQLBuilder {
         return null;
     }
 
+    public static String buildInsertSQL(Object object) {
+
+
+        return null;
+    }
 }

@@ -41,5 +41,4 @@ public @interface Table {
      */
     boolean toUpperCase() default false;
     
-
 }
